@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+from wxpy import TEXT
+from wxpy import Tuling
 from wxpy import ensure_one
+
+from config import TuLingConfig, GroupNames
 
 
 class ZaoBaoService(object):
@@ -11,8 +15,8 @@ class ZaoBaoService(object):
         """
         groups = bot.groups(update=True)
 
-        junwei_group = ensure_one(groups.search('新君威车友交流群'))
-        morning_group = ensure_one(groups.search("Hello , morning!"))
+        junwei_group = ensure_one(groups.search(GroupNames.JUNWEI))
+        morning_group = ensure_one(groups.search(GroupNames.MORNING))
 
         wangerxiao = ensure_one(junwei_group.search('赣州 王二小'))
 
@@ -25,3 +29,20 @@ class ZaoBaoService(object):
     @staticmethod
     def __is_zaobao__(text):
         return text.find('早报') != -1 and text.find('微语') != -1
+
+
+class TulingService(object):
+    @staticmethod
+    def start_tuling(bot):
+        groups = bot.groups(update=True)
+        junwei_group = ensure_one(groups.search(GroupNames.JUNWEI))
+        morning_group = ensure_one(groups.search(GroupNames.MORNING))
+
+        tianya_group = ensure_one(groups.search('天涯'))
+
+        tuling = Tuling(api_key=TuLingConfig.API_KEY)
+
+        @bot.register([junwei_group, morning_group, tianya_group], TEXT)
+        def forward_msg(msg):
+            if msg.is_at:
+                tuling.do_reply(msg, at_member=True)
