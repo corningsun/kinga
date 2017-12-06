@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import time
+
 from wxpy import Bot
 from wxpy import embed
 
@@ -14,6 +16,10 @@ def init_bot():
 
     # 自动消除手机端的新消息小红点提醒
     # Bot.auto_mark_as_read = True
+
+    @bot.register()
+    def forward_msg(msg):
+        print("%s: %s" % (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), msg))
 
     return bot
 
