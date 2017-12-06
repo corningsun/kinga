@@ -27,6 +27,6 @@ if __name__ == '__main__':
 
     TulingService.start_tuling(bot)
 
-    embed()
+    bot.join()
 
     print("main end")

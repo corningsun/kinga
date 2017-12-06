@@ -39,10 +39,13 @@ class TulingService(object):
         morning_group = ensure_one(groups.search(GroupNames.MORNING))
 
         tianya_group = ensure_one(groups.search('天涯'))
+        sunjiaxiao_group = ensure_one(groups.search('孙家小群'))
+        sunjiada_group = ensure_one(groups.search('孙家大群'))
+        yilian_group = ensure_one(groups.search('亿联MO居业主沟通群'))
 
         tuling = Tuling(api_key=TuLingConfig.API_KEY)
 
-        @bot.register([junwei_group, morning_group, tianya_group], TEXT)
+        @bot.register([junwei_group, morning_group, tianya_group, sunjiaxiao_group, sunjiada_group, yilian_group], TEXT)
         def forward_msg(msg):
             if msg.is_at:
                 tuling.do_reply(msg, at_member=True)
