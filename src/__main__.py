@@ -33,6 +33,6 @@ if __name__ == '__main__':
 
     TulingService.start_tuling(bot)
 
-    bot.join()
+    embed()
 
     print("main end")

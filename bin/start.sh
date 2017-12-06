@@ -1,3 +1,3 @@
 #!/bin/sh
 
-nohup python3 ../src/__main__.py >out.log 2>&1 &
+nohup stdbuf -oL python3 ../src/__main__.py >out.log 2>&1 &
