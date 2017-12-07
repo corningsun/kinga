@@ -17,10 +17,6 @@ def init_bot():
     # 自动消除手机端的新消息小红点提醒
     # Bot.auto_mark_as_read = True
 
-    @bot.register()
-    def forward_msg(msg):
-        print("%s: %s" % (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), msg))
-
     return bot
 
 
@@ -32,6 +28,10 @@ if __name__ == '__main__':
     ZaoBaoService.forward_zaobao(bot)
 
     TulingService.start_tuling(bot)
+
+    @bot.register()
+    def forward_msg(msg):
+        print("%s: %s" % (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), msg))
 
     embed()
 
