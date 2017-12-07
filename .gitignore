@@ -103,3 +103,6 @@ ENV/
 \.idea/
 
 tmp/
+
+wxpy.pkl
+wxpy_puid.pkl
