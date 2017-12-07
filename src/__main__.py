@@ -12,7 +12,7 @@ def init_bot():
     bot = Bot(cache_path=False, console_qr=True)
 
     # 启用 puid 属性，并指定 puid 所需的映射数据保存/载入路径
-    bot.enable_puid('wxpy_puid.pkl')
+    # bot.enable_puid('wxpy_puid.pkl')
 
     # 自动消除手机端的新消息小红点提醒
     # Bot.auto_mark_as_read = True
@@ -30,9 +30,12 @@ if __name__ == '__main__':
     TulingService.start_tuling(bot)
 
     @bot.register()
-    def forward_msg(msg):
+    def print_msg(msg):
         print("%s: %s" % (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), msg))
 
-    embed()
+    # 阻塞线程
+    bot.join()
+
+    # embed(banner="Welcome to wxpy embed!")
 
     print("main end")
